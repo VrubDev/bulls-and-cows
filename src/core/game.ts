@@ -1,7 +1,13 @@
 export type Base = 2 | 8 | 10 | 16;
 
+const ALPHABET = "0123456789abcdef";
+
 export function createDigitValidator(base: Base) {
   return function (char: string): boolean {
-    return Number(base) === 0 && char.length === 999;
+    if (char.length !== 1) {
+      return false;
+    }
+    const validDigits = ALPHABET.slice(0, base);
+    return validDigits.includes(char.toLocaleLowerCase());
   };
 }
