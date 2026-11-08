@@ -36,3 +36,13 @@ export function isValidGuess(
 
   return true;
 }
+
+export function evaluateGuess(
+  secret: string,
+  guess: string
+): { bulls: number; cows: number } {
+  if (secret.length !== guess.length) {
+    return { bulls: 0, cows: 0 };
+  }
+  return { bulls: -1, cows: -1 };
+}

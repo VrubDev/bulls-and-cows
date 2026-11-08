@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createDigitValidator } from "./game";
 import { isValidGuess } from "./game";
+import { evaluateGuess } from "./game";
 
 describe("createDigitValidator", () => {
   it("validates binary (base 2) digits correctly", () => {
@@ -60,5 +61,23 @@ describe("isValidGuess", () => {
 
   it("returns false if characters are not unique", () => {
     expect(isValidGuess("1123", 4, 10)).toBe(false);
+  });
+});
+
+describe("evaluateGuess", () => {
+  it("returns all bulls for an exact match", () => {
+    expect(evaluateGuess("1234", "1234")).toEqual({ bulls: 4, cows: 0 });
+  });
+
+  it("returns all cows if all characters are correct but in wrong positions", () => {
+    expect(evaluateGuess("1234", "4321")).toEqual({ bulls: 0, cows: 4 });
+  });
+
+  it("returns correct mix of bulls and cows", () => {
+    expect(evaluateGuess("1234", "1524")).toEqual({ bulls: 2, cows: 1 });
+  });
+
+  it("returns zeros if there are no matching characters", () => {
+    expect(evaluateGuess("1234", "5678")).toEqual({ bulls: 0, cows: 0 });
   });
 });
