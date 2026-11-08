@@ -11,3 +11,19 @@ export function createDigitValidator(base: Base) {
     return validDigits.includes(char.toLocaleLowerCase());
   };
 }
+
+export function isValidGuess(
+  guess: string,
+  length: number,
+  base: Base
+): boolean {
+  if (guess.length !== length) {
+    return false;
+  }
+
+  if (base < 2) {
+    return false;
+  }
+
+  return true;
+}

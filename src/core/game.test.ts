@@ -42,3 +42,22 @@ describe("createDigitValidator", () => {
     expect(isDecimal("10")).toBe(false);
   });
 });
+
+describe("isValidGuess", () => {
+  it("returns true for a completely valid guess", () => {
+    expect(isValidGuess("1234", 4, 10)).toBe(true);
+  });
+
+  it("returns false if the length is incorrect", () => {
+    expect(isValidGuess("123", 4, 10)).toBe(false);
+    expect(isValidGuess("12345", 4, 10)).toBe(false);
+  });
+
+  it("returns false if it contains invalid characters for the base", () => {
+    expect(isValidGuess("123a", 4, 10)).toBe(false);
+  });
+
+  it("returns false if characters are not unique", () => {
+    expect(isValidGuess("1123", 4, 10)).toBe(false);
+  });
+});
