@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createDigitValidator } from "./game";
+import { isValidGuess } from "./game";
 
 describe("createDigitValidator", () => {
   it("validates binary (base 2) digits correctly", () => {

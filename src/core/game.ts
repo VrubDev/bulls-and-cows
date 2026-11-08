@@ -21,7 +21,16 @@ export function isValidGuess(
     return false;
   }
 
-  if (base < 2) {
+  const uniqueChars = new Set(guess.split(""));
+  if (uniqueChars.size !== guess.length) {
+    return false;
+  }
+
+  const isValidDigit = createDigitValidator(base);
+  const chars = guess.split("");
+
+  const allCharsValid = chars.every((char) => isValidDigit(char));
+  if (!allCharsValid) {
     return false;
   }
 
