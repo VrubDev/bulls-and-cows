@@ -62,5 +62,18 @@ export function generateSecret(length: number, base: Base): string {
     return "error";
   }
 
-  return "";
+  const isValidDigit = createDigitValidator(base);
+  const secretSet = new Set<string>();
+
+  while (secretSet.size < length) {
+    const randomIndex = Math.floor(Math.random() * base);
+
+    const char = randomIndex.toString(base);
+
+    if (isValidDigit(char)) {
+      secretSet.add(char);
+    }
+  }
+
+  return Array.from(secretSet).join("");
 }
