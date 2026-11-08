@@ -44,5 +44,15 @@ export function evaluateGuess(
   if (secret.length !== guess.length) {
     return { bulls: 0, cows: 0 };
   }
-  return { bulls: -1, cows: -1 };
+
+  const guessChars = guess.split("");
+
+  const bulls = guessChars.filter(
+    (char, index) => char === secret[index]
+  ).length;
+  const cows = guessChars.filter(
+    (char, index) => char !== secret[index] && secret.includes(char)
+  ).length;
+
+  return { bulls, cows };
 }
