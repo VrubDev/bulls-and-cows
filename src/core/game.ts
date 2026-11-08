@@ -56,3 +56,11 @@ export function evaluateGuess(
 
   return { bulls, cows };
 }
+
+export function generateSecret(length: number, base: Base): string {
+  if (length < 1 || base < 2) {
+    return "error";
+  }
+
+  return "";
+}

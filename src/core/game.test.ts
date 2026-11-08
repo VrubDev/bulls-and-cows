@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { createDigitValidator } from "./game";
 import { isValidGuess } from "./game";
 import { evaluateGuess } from "./game";
+import { generateSecret } from "./game";
 
 describe("createDigitValidator", () => {
   it("validates binary (base 2) digits correctly", () => {
@@ -79,5 +80,26 @@ describe("evaluateGuess", () => {
 
   it("returns zeros if there are no matching characters", () => {
     expect(evaluateGuess("1234", "5678")).toEqual({ bulls: 0, cows: 0 });
+  });
+});
+
+describe("generateSecret", () => {
+  it("returns a string of the correct length", () => {
+    const secret = generateSecret(4, 10);
+    expect(secret.length).toBe(4);
+  });
+
+  it("returns only unique characters", () => {
+    const secret = generateSecret(4, 10);
+    const uniqueChars = new Set(secret.split(""));
+    expect(uniqueChars.size).toBe(secret.length);
+  });
+
+  it("only uses valid characters for the given base", () => {
+    const secret = generateSecret(4, 16);
+    const isValidDigit = createDigitValidator(16);
+
+    const allValid = secret.split("").every((char) => isValidDigit(char));
+    expect(allValid).toBe(true);
   });
 });
