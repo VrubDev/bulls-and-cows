@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { createDigitValidator } from "./game";
-import { isValidGuess } from "./game";
-import { evaluateGuess } from "./game";
-import { generateSecret } from "./game";
+import { createDigitValidator } from "./game.js";
+import { isValidGuess } from "./game.js";
+import { evaluateGuess } from "./game.js";
+import { generateSecret } from "./game.js";
 
 describe("createDigitValidator", () => {
   it("validates binary (base 2) digits correctly", () => {
@@ -99,7 +99,9 @@ describe("generateSecret", () => {
     const secret = generateSecret(4, 16);
     const isValidDigit = createDigitValidator(16);
 
-    const allValid = secret.split("").every((char) => isValidDigit(char));
+    const allValid = secret
+      .split("")
+      .every((char: string) => isValidDigit(char));
     expect(allValid).toBe(true);
   });
 });
